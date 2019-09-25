@@ -31,6 +31,22 @@ h3{
   clear: both;
 }
 
+.heading{
+  background-color: #33A1DE;
+}
+
+.main-container{
+  text-align: center;
+}
+
+.heading > h1{
+  color: white;
+  /* text-align: center; */
+  font-family: 'Abril Fatface', cursive;
+  font-size: 40px;
+  margin: 0;
+}
+
 header{
   background-color: gray;
 }
