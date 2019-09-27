@@ -6,24 +6,23 @@ const validHost = require('../models/validHost')
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-passport.use(new GoogleStrategy({
 
+passport.use(new GoogleStrategy({
   callbackURL: '/auth/google/redirect',
   clientID: keys.google.clientID,
   clientSecret: keys.google.clientSecret
+}, (accessToken, requestToken, profile, done) => {
 
-  }, (accessToken, requestToken, profile, done) => {
-
-    User.findOne({
-      googleId: profile.id
+  User.findOne({
+    googleId: profile.googleId
     }).then((currentUser) => {
+
       if(currentUser)
-        console.log("not a new user")
+      console.log(currentUser)
 
       else{
         let isHost = false
-        let doc = mongoose.model('hosts')
-        let record = doc.findOne({email: profile.emails[0].value})
+        let record = mongoose.model('hosts').findOne({email: profile.emails[0].value})
         if(record)
         isHost = true
         new User({
@@ -31,9 +30,8 @@ passport.use(new GoogleStrategy({
           googleId: profile.id,
           image: profile.photos[0].value,
           isHost: isHost
-
         }).save().then((newUser) => {
-            console.log(newUser)
+          console.log(newUser)
         })
       }
     })

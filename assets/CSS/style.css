@@ -254,8 +254,6 @@ header > a{
   margin: 50px auto;
   border: 1px solid darkgray;
   padding: 0px 10px;
-  display: flex;
-  flex-direction: column;
 }
 
 .testbar{
@@ -317,6 +315,10 @@ header > a{
   margin-left: auto;
   margin-right: auto;
   padding: 6% 6%;
+}
+
+.add-page{
+  display: block;
 }
 
 .test-name{
@@ -590,7 +592,7 @@ header > a{
   margin: 0;
 }
 
-.add-btn, .add-question-btn{
+.add-btn, .add-question-btn, .done-btn{
   position: absolute;
   top: 0;
   right: 0;
@@ -607,9 +609,20 @@ header > a{
 .add-question-btn{
   top: auto;
   bottom: 3%;
-  left: 50%;
+  /* left: 50%;
   transform: translate(-50%, 0);
-  right: auto;
+  right: auto; */
+  right: 10%;
+  margin: 0;
+}
+
+.done-btn{
+  top: auto;
+  bottom: 3%;
+  /* left: 50%;
+  transform: translate(-50%, 0);
+  right: auto; */
+  left: 10%;
   margin: 0;
 }
 
@@ -634,8 +647,7 @@ header > a{
 }
 
 .topic-container{
-  width: 40%;
-  float: left;
+  text-align: center;
   padding: 20px;
 }
 
@@ -661,8 +673,7 @@ header > a{
 }
 
 .question-container{
-  width: 40%;
-  float: right;
+  text-align: center;
   padding: 20px 20px;
 }
 
@@ -715,6 +726,18 @@ footer{
   .login-btn{
     width: 20%;
   }
+
+  .topic-container{
+    width: 40%;
+    float: left;
+    text-align: left;
+  }
+
+  .question-container{
+    width: 40%;
+    float: right;
+    text-align: left;
+  }
 }
 
 @media screen and (min-width: 992px){
@@ -735,13 +758,11 @@ footer{
   }
 
   .test-wrapper{
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
+   
   }
 
   .test-flex{
-    width: 45%;
+   break-inside: avoid;
   }
 
   .image-container{
