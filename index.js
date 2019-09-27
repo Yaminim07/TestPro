@@ -20,7 +20,6 @@ mongoose.connect(keys.mongodb.dbURI, (err) => {
   console.log('database connected')
 })
 
-
 app.use('/auth', authRoutes)
 
 
@@ -34,6 +33,10 @@ app.get('/', (req, res) => {
 
 app.get('/host', (req, res) => {
   res.sendFile('views/host.html' , { root : __dirname});
+});
+
+app.get('/user', (req, res) => {
+  res.sendFile('views/user.html' , { root : __dirname});
 });
 
 
