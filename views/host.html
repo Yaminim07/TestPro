@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="../assets/CSS/style.css">
     <script src="../index.js"></script>
+    <script src="../helper.js"></script>
+
     <title>Host Page</title>
 </head>
-<body>
+<body onload="fetchData()">
   <header class="clearfix">
     <div class="logo-container"><img src="" alt="Logo"></div>
-    <a href="index.html">LOGOUT</a>
+    <a href="/logout">LOGOUT</a>
   </header>
 
   <!-- <div class="add-page">
@@ -52,10 +54,10 @@
   <div class="host-details">
     <h3>TESTS HOSTED BY YOU</h3>
     <!-- <span class="back-btn"><a href="" onclick="loadResult()"><i class="fa fa-arrow-left"></i></a></span> -->
-    <a class="add-btn" href="./add-page.html"><i class="fa fa-plus"></i><span>ADD</span></a>
+    <a class="add-btn" href="/newTest-page"><i class="fa fa-plus"></i><span>ADD</span></a>
     <div class="test-hosted">
       <div class="test">
-        <div class="your-test clearfix">
+        <!-- <div class="your-test clearfix">
           <div class="topic-container">
             <h4>Topic</h4>
             <p>HTML</p>
@@ -137,7 +139,7 @@
               <span>DELETE</span>
             </a>
           </div>
-        </div> 
+        </div>  -->
       </div>
     </div>
   </div>
@@ -145,5 +147,73 @@
   <footer>
     <p>copyright info</p>
   </footer>
+  <script>
+
+    // function fetchData() {
+    //   var request = new XMLHttpRequest();
+    //   request.onreadystatechange = function () {
+    //   if (this.readyState == 4 && this.status == 200) {
+    //     var newData = JSON.parse(this.response)
+    //     console.log(newData)
+    //     let parent = document.getElementsByClassName('test')[0]
+    //     for(let i = 0;i < newData.length;i++){
+    //       let topicContainer = document.createElement("div")
+    //       topicContainer.setAttribute("class",'topic-container')
+    //       let h4 = document.createElement("h4")
+    //       h4.innerHTML = "TOPIC"
+    //       let p = document.createElement("p")
+    //       p.innerHTML = newData[i].testname
+    //       topicContainer.appendChild(h4)
+    //       topicContainer.appendChild(p)
+    //       let questionContainer = document.createElement("div")
+    //       questionContainer.setAttribute("class",'question-container')
+    //       h4 = document.createElement("h4")
+    //       h4.innerHTML = "Questions"
+    //       p = document.createElement("p")
+    //       p.innerHTML = newData[i].questions.length
+    //       questionContainer.appendChild(h4)
+    //       questionContainer.appendChild(p)
+
+    //       //Edit btn
+
+    //       let btnContainer = document.createElement("div")
+    //       btnContainer.setAttribute("class","btn-container clearfix")
+    //       let editBtn = document.createElement("a")
+    //       editBtn.setAttribute("class","edit-btn")
+    //       let icon = document.createElement("i")
+    //       icon.setAttribute("class","fa fa-pencil")
+    //       let txt = document.createElement("span")
+    //       txt.innerHTML = "EDIT"
+    //       editBtn.appendChild(icon)
+    //       editBtn.appendChild(txt)
+    //       btnContainer.appendChild(editBtn)
+
+    //       //Delete btn
+
+    //       let deleteBtn = document.createElement("a")
+    //       deleteBtn.setAttribute("class","delete-btn")
+    //       icon = document.createElement("i")
+    //       icon.setAttribute("class","fa fa-trash")
+    //       txt = document.createElement("span")
+    //       txt.innerHTML = "DELETE"
+    //       deleteBtn.appendChild(icon)
+    //       deleteBtn.appendChild(txt)
+    //       btnContainer.appendChild(deleteBtn)
+
+
+    //       let yourTest = document.createElement("div")
+    //       yourTest.setAttribute("class","your-test clearfix")
+    //       yourTest.appendChild(topicContainer)
+    //       yourTest.appendChild(questionContainer)
+    //       yourTest.appendChild(btnContainer)
+    //       parent.appendChild(yourTest)
+    //     }
+    //   }
+    //   };
+    //   request.open('GET','/fetch-data', true)
+    //   request.send();
+    // }
+
+  </script>
 </body>
 </html>

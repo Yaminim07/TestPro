@@ -7,7 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="../assets/CSS/style.css">
-  <script src="../index.js"></script>
+  <!-- <script src="../index.js"></script> -->
+  <script src="./helper.js"></script>
   <title>Host Page</title>
 </head>
 
@@ -29,32 +30,12 @@
       <div><input type="text" name="option2" value="option2"></div>
       <div><input type="text" name="option3" value="option3"></div>
     </div>
-    <input type="submit" name="action" class="add-question-btn" value="ADD QUESTION"> 
+    <input type="button" name="action" class="add-question-btn" value="ADD QUESTION" onclick="addQuestion()"> 
+    <input type="button" name="action" class="add-question-btn done-btn" value="DONE" onclick="saveData()"> 
+    <a href="/profile">LOAD PROFILE</a>
     <!-- <input type="submit" name="action" class="done-btn" value="DONE">     -->
   </form>
 
-  <script>
-
-    let form = new FormData(document.getElementById('form-element'));
-    let testName = document.getElementsByClassName('testname')
-    form.onsubmit = function(){
-      var request = new XMLHttpRequest()
-      var data = {
-        testname: form.get('testname'),
-        question: form.get('question'),
-        answer: form.get('answer'),
-        option1: form.get('option1'),
-        option2: form.get('option2'),
-        option3: form.get('option3')
-      }
-      request.open('POST','/add-question',true)
-      request.setRequestHeader('Content-Type', 'application/json');
-      request.send(JSON.stringify(data))
-      return false
-   };
-    
-
-  </script>
 </body>
 
 </html>

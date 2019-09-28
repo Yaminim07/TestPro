@@ -6,5 +6,9 @@ module.exports = {
   
   mongodb: {
     dbURI: 'mongodb+srv://yaminim:dL1KxIyamC85IWpe@cluster0-ofkrb.mongodb.net/test?retryWrites=true&w=majority'
+  },
+
+  session: {
+    cookieKey: 'testproisawesome'
   }
 };

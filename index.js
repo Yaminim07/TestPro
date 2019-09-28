@@ -1,17 +1,35 @@
 const express = require('express')
 const authRoutes = require('./routes/auth-routes.js')
+const profileRoutes = require('./routes/host-routes')
+
 const passAuth = require('./config/passport-setup')
 const mongoose = require('mongoose')
-const schema = require('./schema')
+// const schema = require('./schema')
 const bodyParser = require('body-parser')
 
 const keys = require('./config/keys')
-
-
+const cookieSession = require('cookie-session')
+const passport = require('passport')
 const app = express();
 // const multer = require('multer')
 
 // const upload = multer()
+
+const path = require('path')
+
+const schema = require('./models/schema')
+
+
+app.use(express.static(__dirname))
+
+app.use(cookieSession({
+  maxAge: 24 * 60 * 60 * 1000,
+  keys: [keys.session.cookieKey]
+}))
+
+app.use(passport.initialize());
+
+app.use(passport.session());
 
 mongoose.connect(keys.mongodb.dbURI, (err) => {
   if(err){
@@ -21,6 +39,8 @@ mongoose.connect(keys.mongodb.dbURI, (err) => {
 })
 
 app.use('/auth', authRoutes)
+app.use('/profile', profileRoutes)
+
 
 
 app.use('/assets', express.static('assets'));
@@ -30,6 +50,10 @@ app.get('/', (req, res) => {
   res.sendFile('views/index.html' , { root : __dirname});
 });
 
+app.get('/logout', (req,res) => {
+  req.logOut();
+  res.sendFile(path.resolve(__dirname + '/views/index.html'));  
+})
 
 app.get('/host', (req, res) => {
   res.sendFile('views/host.html' , { root : __dirname});
@@ -42,6 +66,14 @@ app.get('/user', (req, res) => {
 
 app.get('/newTest-page', (req, res) => {
   res.sendFile('views/add-page.html' , { root : __dirname});
+});
+
+app.get('/fetch-data', (req, res) => {
+  mongoose.model('test').find({host_id: req.user.id}).then((data) => {
+    // console.log(typeof data)
+    res.send(data)
+  })
+  // res.sendFile('views/add-page.html' , { root : __dirname});
 });
 
 
@@ -57,7 +89,14 @@ app.use(bodyParser.urlencoded({
   
 
 app.post('/add-question', (req, res) => {
-  console.log(req.body)
+  
+  // console.log(req.body)
+  new schema.Test({
+    testname: req.body.testname,
+    host_id: req.user.id,
+    questions: req.body.questions
+  }).save()
+  res.send()
 });
 
 
@@ -72,13 +111,6 @@ app.get('/add-question', (req, res) => {
 app.listen(process.env.PORT || 3000, () => {
   console.log('Request recieving')
 });
-
-
-
-
-
-
-
 
 
 

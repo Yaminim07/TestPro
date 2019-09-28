@@ -7,6 +7,19 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 
+passport.serializeUser((user,done) => {
+  done(null, user.id)
+})
+
+
+passport.deserializeUser((id,done) => {
+  User.findById(id).then((user) => {
+    done(null, user)
+  })
+})
+
+
+
 passport.use(new GoogleStrategy({
   callbackURL: '/auth/google/redirect',
   clientID: keys.google.clientID,
@@ -14,25 +27,45 @@ passport.use(new GoogleStrategy({
 }, (accessToken, requestToken, profile, done) => {
 
   User.findOne({
-    googleId: profile.googleId
+    googleId: profile.id
     }).then((currentUser) => {
 
-      if(currentUser)
-      console.log(currentUser)
+      if(currentUser){
+        console.log(currentUser)
+        done(null, currentUser)
+      }
 
       else{
-        let isHost = false
-        let record = mongoose.model('hosts').findOne({email: profile.emails[0].value})
-        if(record)
-        isHost = true
-        new User({
-          username: profile.displayName,
-          googleId: profile.id,
-          image: profile.photos[0].value,
-          isHost: isHost
-        }).save().then((newUser) => {
-          console.log(newUser)
+        // console.log(profile)
+        let isHost ;
+        mongoose.model('hosts').find({"email": profile.emails[0].value}, function(err, result){
+          // console.log(result)
+          if(result[0])
+          isHost = true
+          else
+          isHost = false
+          new User({
+            username: profile.displayName,
+            googleId: profile.id,
+            image: profile.photos[0].value,
+            isHost: isHost
+          }).save().then((newUser) => {
+            console.log(newUser)
+            done(null, newUser)
+          })
         })
+        // if(Object.keys(record).length >= 0)
+        // isHost = true
+        
+        // new User({
+        //   username: profile.displayName,
+        //   googleId: profile.id,
+        //   image: profile.photos[0].value,
+        //   isHost: isHost
+        // }).save().then((newUser) => {
+        //   console.log(newUser)
+        //   done(null, newUser)
+        // })
       }
     })
   })
