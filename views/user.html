@@ -21,27 +21,27 @@
 
   <div class="test-page">
     <div class="cross">
-      <span class="cross-container"><i class="fa fa-times" onclick="loadHome()"></i></span>
+      <a href="/user" onclick="return setZero()"><span class="cross-container"><i class="fa fa-times"></i></span></a>
     </div>
     <div class="question">
       <p class="question-space">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate suscipit quo unde esse eveniet dicta nobis
         incidunt ipsam! Eum repellat ab veritatis quaerat deleniti molestias alias. Harum quis cupiditate suscipit!</p>
     </div>
     <div class="answers">
-      <div class="option1"><input type="checkbox" name="answer1" id="option1"></div>
-      <div class="option2"><input type="checkbox" name="answer2" id="option2"></div>
-      <div class="option3"><input type="checkbox" name="answer3" id="option3"></div>
-      <div class="option4"><input type="checkbox" name="answer4" id="option4"></div>
+      <div class="option1"><input type="checkbox" name="answer1" id="option1"><span id="answer1">ANSWER1</span></div>
+      <div class="option2"><input type="checkbox" name="answer2" id="option2"><span id="answer2">ANSWER1</span></div>
+      <div class="option3"><input type="checkbox" name="answer3" id="option3"><span id="answer3">ANSWER1</span></div>
+      <div class="option4"><input type="checkbox" name="answer4" id="option4"><span id="answer4">ANSWER1</span></div>
     </div>
     <div class="check-tab" onclick="checkAnswer()">
-      <a href="">CHECK</a>
+      <a>CHECK</a>
     </div>
     <div class="next clearfix">
       <!-- <span class="score">
         <span>SCORE</span>
         <span class="score-holder"></span>
       </span>   -->
-      <span><a onclick="continueTest()"><i class="fa fa-arrow-right"></i></a></span>
+      <span onclick="continueTest()"><a><i class="fa fa-arrow-right"></i></a></span>
     </div>
   </div>
 
@@ -200,7 +200,7 @@
 
   <div class="result">
     <div class="cross">
-      <span class="cross-container"><i class="fa fa-times" onclick="loadHome()"></i></span>
+      <a href="/user"><span class="cross-container"><i class="fa fa-times"></i></span></a>
     </div>
 
     <div class="acknowledgement">
@@ -218,14 +218,14 @@
     <div class="link-container">
      <div class="certificate-tab"><span>Certificate Link</span></div>
      <div class="link">
-       <a href="">certificate</a>
-       <a href=""><span class="copy-icon" onclick="copyLink()"><i class="fa fa-copy"></i></span></a>
+       <a href="" class="certificate-link" target="_blank">certificate</a>
+       <!-- <a class="copy-icon" onclick="copyLink()"><i class="fa fa-copy"></i></a> -->
      </div> 
     </div>
   </div>
 
   <footer>
-    <p>copyright info</p>
+      <p class="copyright">This application is made by <i class="fa fa-smile-o"></i> Yaminim</p>
   </footer>
 
 
@@ -278,7 +278,7 @@
 
 
 
-
+    var activeTests = [];
 
     var index = 0, score = 0, answer, id;
 
@@ -298,16 +298,16 @@
     // }
 
 
-    function showDetails(index){
-      let elem = document.getElementsByClassName("test-details")
-      if( !elem[index - 1].style.display || elem[index - 1].style.display === "none")
-      elem[index - 1].style.display = "block"
-      else
-      elem[index - 1].style.display = "none"
+    // function showDetails(index){
+    //   let elem = document.getElementsByClassName("test-details")
+    //   if( !elem[index - 1].style.display || elem[index - 1].style.display === "none")
+    //   elem[index - 1].style.display = "block"
+    //   else
+    //   elem[index - 1].style.display = "none"
       
-      // elem[0].style.transform = "scaleY(1)"
-      // elem[0].style.display = "block"
-    }
+    //   // elem[0].style.transform = "scaleY(1)"
+    //   // elem[0].style.display = "block"
+    // }
   </script>
 </body>
 

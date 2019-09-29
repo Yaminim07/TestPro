@@ -1,3 +1,6 @@
+@import "normalize.css";
+
+
 h1{
   font-family: 'Roboto', sans-serif;
   font-weight: 700;
@@ -20,6 +23,23 @@ h3{
   margin: 10px 0px;
 }
 
+a{
+  text-decoration: none;
+}
+
+
+.color-blue{
+  color: #33A1DE;
+  font-size: 30px;
+  vertical-align: middle;
+}
+
+.fa-check{
+  float: left;
+  padding: 0px 5px;
+  display: block;
+}
+
 .fa-exclamation{
   font-size: 30px;
   color: green;
@@ -33,6 +53,7 @@ h3{
 
 .heading{
   background-color: #33A1DE;
+  padding: 50px 0px;
 }
 
 .main-container{
@@ -43,8 +64,21 @@ h3{
   color: white;
   /* text-align: center; */
   font-family: 'Abril Fatface', cursive;
-  font-size: 40px;
+  font-size: 60px;
   margin: 0;
+}
+
+.certifies{
+  font-size: 22px;
+  padding: 20px 0px;
+  font-weight: bold;
+}
+
+#username ,#test{
+  font-size: 28px;
+  font-weight: bold;
+  padding: 13px 0px;
+  color: #33A1DE;
 }
 
 header{
@@ -109,10 +143,6 @@ header > a{
   margin: 0px auto;
   padding: 10px 20px;
   background-color: #4B0082;
-}
-
-.login-btn a{
-  text-decoration: none;
   font-family: 'Poppins', sans-serif;
   color: white;  
   font-weight: bold;
@@ -128,6 +158,13 @@ header > a{
   font-size: 20px;
   vertical-align: middle;
   font-family: 'Poppins', sans-serif;
+}
+
+.text-container > span{
+  float: left;
+  display: block;
+  width: 80%;
+  margin-left: 8px;
 }
 
 .intro-wrapper{
@@ -161,9 +198,9 @@ header > a{
   color: black;
 }
 
-.wrapper{
+/* .wrapper{
   text-align: center;
-}
+} */
 
 .fa-check{
   font-size: 30px;
@@ -287,6 +324,7 @@ header > a{
   font-family: 'Poppins', sans-serif;
   font-weight: bold;
   border-radius: 7px;
+  cursor: pointer;
 }
 
 .applyFade > a{
@@ -448,7 +486,7 @@ header > a{
 .answers > div{
   padding: 20px 0px;
   width: 50%;
-  text-align: center;
+
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
   font-weight: bold;
@@ -479,6 +517,11 @@ header > a{
   vertical-align: sub;
 }
 
+input[type="checkbox"]{
+  width: 20px;
+  height: 20px;
+}
+
 .check-tab{
   padding: 10px 0px;
   background-color: lightgray;
@@ -486,6 +529,7 @@ header > a{
   margin: 12px 0px;
   font-family: 'Poppins', sans-serif; 
   font-weight: bold;
+  cursor: pointer;
 }
 
 .check-tab a{
@@ -502,12 +546,11 @@ header > a{
   padding: 16px;
   background-color: lightsteelblue;
   border-radius: 50%;
+  cursor: pointer;
 }
 
-.next > span:first-child{
-  float: left;
-  background: none;
-  border: none;
+.next>span:hover{
+  background-color: lightgray;
 }
 
 .score > span{
@@ -569,6 +612,7 @@ header > a{
   top: 0;
   right: 0;
   border: 1px solid gray;
+  cursor: pointer;
 }
 
 .certificate-tab{
@@ -604,6 +648,7 @@ header > a{
   border-radius: 5px;
   margin-right: 5%;
   margin-top: 20px;
+  cursor: pointer;
 }
 
 .add-question-btn{
@@ -624,6 +669,7 @@ header > a{
   right: auto; */
   left: 10%;
   margin: 0;
+  right: auto;
 }
 
 .back-btn{
@@ -711,6 +757,11 @@ footer{
   text-align: center;
   background-color: gray;
   clear: both;
+}
+
+.copyright{
+  color: white;
+  font-weight: bold;
 }
 
 @media screen and (min-width: 576px){

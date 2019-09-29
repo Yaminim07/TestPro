@@ -145,76 +145,77 @@
   </div>
 
   <footer>
-    <p>copyright info</p>
+    <p class="copyright">This application is made by <i class="fa fa-smile-o"></i> Yaminim</p>
   </footer>
   <script>
     var testname;
-    var questions = []
+    var questions = [];
+    var yourTests = [];
 
-    function fetchData() {
-      var request = new XMLHttpRequest();
-      request.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
-        var newData = JSON.parse(this.response)
-        console.log(newData)
-        let parent = document.getElementsByClassName('test')[0]
-        for(let i = 0;i < newData.length;i++){
-          let topicContainer = document.createElement("div")
-          topicContainer.setAttribute("class",'topic-container')
-          let h4 = document.createElement("h4")
-          h4.innerHTML = "TOPIC"
-          let p = document.createElement("p")
-          p.innerHTML = newData[i].testname
-          topicContainer.appendChild(h4)
-          topicContainer.appendChild(p)
-          let questionContainer = document.createElement("div")
-          questionContainer.setAttribute("class",'question-container')
-          h4 = document.createElement("h4")
-          h4.innerHTML = "Questions"
-          p = document.createElement("p")
-          p.innerHTML = newData[i].questions.length
-          questionContainer.appendChild(h4)
-          questionContainer.appendChild(p)
+    // function fetchData() {
+    //   var request = new XMLHttpRequest();
+    //   request.onreadystatechange = function () {
+    //   if (this.readyState == 4 && this.status == 200) {
+    //     var newData = JSON.parse(this.response)
+    //     console.log(newData)
+    //     let parent = document.getElementsByClassName('test')[0]
+    //     for(let i = 0;i < newData.length;i++){
+    //       let topicContainer = document.createElement("div")
+    //       topicContainer.setAttribute("class",'topic-container')
+    //       let h4 = document.createElement("h4")
+    //       h4.innerHTML = "TOPIC"
+    //       let p = document.createElement("p")
+    //       p.innerHTML = newData[i].testname
+    //       topicContainer.appendChild(h4)
+    //       topicContainer.appendChild(p)
+    //       let questionContainer = document.createElement("div")
+    //       questionContainer.setAttribute("class",'question-container')
+    //       h4 = document.createElement("h4")
+    //       h4.innerHTML = "Questions"
+    //       p = document.createElement("p")
+    //       p.innerHTML = newData[i].questions.length
+    //       questionContainer.appendChild(h4)
+    //       questionContainer.appendChild(p)
 
-          //Edit btn
+    //       //Edit btn
 
-          let btnContainer = document.createElement("div")
-          btnContainer.setAttribute("class","btn-container clearfix")
-          let editBtn = document.createElement("a")
-          editBtn.setAttribute("class","edit-btn")
-          let icon = document.createElement("i")
-          icon.setAttribute("class","fa fa-pencil")
-          let txt = document.createElement("span")
-          txt.innerHTML = "EDIT"
-          editBtn.appendChild(icon)
-          editBtn.appendChild(txt)
-          btnContainer.appendChild(editBtn)
+    //       let btnContainer = document.createElement("div")
+    //       btnContainer.setAttribute("class","btn-container clearfix")
+    //       let editBtn = document.createElement("a")
+    //       editBtn.setAttribute("class","edit-btn")
+    //       let icon = document.createElement("i")
+    //       icon.setAttribute("class","fa fa-pencil")
+    //       let txt = document.createElement("span")
+    //       txt.innerHTML = "EDIT"
+    //       editBtn.appendChild(icon)
+    //       editBtn.appendChild(txt)
+    //       btnContainer.appendChild(editBtn)
 
-          //Delete btn
+    //       //Delete btn
 
-          let deleteBtn = document.createElement("a")
-          deleteBtn.setAttribute("class","delete-btn")
-          icon = document.createElement("i")
-          icon.setAttribute("class","fa fa-trash")
-          txt = document.createElement("span")
-          txt.innerHTML = "DELETE"
-          deleteBtn.appendChild(icon)
-          deleteBtn.appendChild(txt)
-          btnContainer.appendChild(deleteBtn)
+    //       let deleteBtn = document.createElement("a")
+    //       deleteBtn.setAttribute("class","delete-btn")
+    //       icon = document.createElement("i")
+    //       icon.setAttribute("class","fa fa-trash")
+    //       txt = document.createElement("span")
+    //       txt.innerHTML = "DELETE"
+    //       deleteBtn.appendChild(icon)
+    //       deleteBtn.appendChild(txt)
+    //       btnContainer.appendChild(deleteBtn)
 
 
-          let yourTest = document.createElement("div")
-          yourTest.setAttribute("class","your-test clearfix")
-          yourTest.appendChild(topicContainer)
-          yourTest.appendChild(questionContainer)
-          yourTest.appendChild(btnContainer)
-          parent.appendChild(yourTest)
-        }
-      }
-      };
-      request.open('GET','/fetch-data', true)
-      request.send();
-    }
+    //       let yourTest = document.createElement("div")
+    //       yourTest.setAttribute("class","your-test clearfix")
+    //       yourTest.appendChild(topicContainer)
+    //       yourTest.appendChild(questionContainer)
+    //       yourTest.appendChild(btnContainer)
+    //       parent.appendChild(yourTest)
+    //     }
+    //   }
+    //   };
+    //   request.open('GET','/fetch-data', true)
+    //   request.send();
+    // }
 
   </script>
 </body>

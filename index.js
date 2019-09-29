@@ -35,7 +35,6 @@ mongoose.connect(keys.mongodb.dbURI, (err) => {
   if(err){
     console.log(err);
   }
-  console.log('database connected')
 })
 
 app.use('/auth', authRoutes)
@@ -67,6 +66,11 @@ app.get('/user', (req, res) => {
 app.get('/newTest-page', (req, res) => {
   res.sendFile('views/add-page.html' , { root : __dirname});
 });
+
+app.get('/certificate', (req, res) => {
+  res.sendFile('views/certificate.html' , { root : __dirname});
+});
+
 
 app.get('/fetch-data', (req, res) => {
   mongoose.model('test').find({host_id: req.user.id}).then((data) => {
@@ -104,12 +108,64 @@ app.post('/add-question', (req, res) => {
 });
 
 
+app.post('/save-test-details', (req, res) => {
+  // console.log(req.body)
+
+  // let testname = mongoose.model('test').findOne({_id: req.body.test_id}).testname
+  // console.log(testname)
+  new schema.Performance({
+    testname : req.body.testname,
+    username: req.user.username,
+    score: req.body.score
+  }).save().then((data) => {
+    // console.log(data)
+    res.send(data)
+  })
+})
+
+
+app.post('/delete-data', (req, res) => {
+  mongoose.model('test').remove(req.body).then((data) => {
+    // console.log(data)
+  })
+})
+
 
 app.get('/add-question', (req, res) => {
   // add Question To Database
   
   res.sendFile('views/add-page.html' , { root : __dirname});
 });
+
+
+
+
+
+app.get('/generate-link/:resultId', (req, res) => {
+
+  // mongoose.model('performance').findOne({_id: req.params.resultId}).then((data) => {
+  //   // console.log(data)
+  //   document.getElementById('testname').innerHTML = data.testname
+  //   res.sendFile('views/certificate.html' , { root : __dirname});  
+  // })
+  res.sendFile('views/certificate.html' , { root : __dirname});    
+});
+
+app.post('/get-test-data', (req, res) => {
+  // console.log(req.body)
+  // console.log(JSON.parse(req.body))
+  mongoose.model('performance').find({_id: req.body.id}).then((data) => {
+    
+    res.send(data)
+  })
+
+});
+
+
+
+
+
+
 
 
 app.listen(process.env.PORT || 3000, () => {

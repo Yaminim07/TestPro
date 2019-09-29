@@ -16,10 +16,18 @@ const test = new schema({
   questions: [question]
 });
 
+const performance = new schema({
+  testname: String,
+  username: String,
+  score: Number
+});
+
+const Performance = mongoose.model('performance',performance)
 
 const Test = mongoose.model('test',test)
 
 module.exports = {
-  Test: Test
+  Test: Test,
+  Performance: Performance
 };
 
