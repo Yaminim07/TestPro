@@ -76,7 +76,11 @@ app.get('/fetch-data', (req, res) => {
   // res.sendFile('views/add-page.html' , { root : __dirname});
 });
 
-
+app.get('/load-tests', (req,res) => {
+  mongoose.model('test').find({}).then((data) => {
+    res.send(data)
+  })
+})
 
 
 app.use(bodyParser.json());
