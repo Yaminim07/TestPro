@@ -1,5 +1,5 @@
 // const schema = require('./models/schema')
-const mongoose = require('mongoose')
+// const mongoose = require('mongoose')
 
 // mongoose.model('tests').remove({})
 

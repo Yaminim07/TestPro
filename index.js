@@ -46,12 +46,15 @@ app.use('/assets', express.static('assets'));
 
 
 app.get('/', (req, res) => {
-  res.sendFile('views/index.html' , { root : __dirname});
+  // res.sendFile('views/index.html' , { root : __dirname});
+  res.sendFile(path.resolve(__dirname + '/views/index.html'));  
+
 });
 
 app.get('/logout', (req,res) => {
   req.logOut();
-  res.sendFile(path.resolve(__dirname + '/views/index.html'));  
+  // res.sendFile(path.resolve(__dirname + '/views/index.html'));  
+  res.redirect('/')
 })
 
 app.get('/host', (req, res) => {
