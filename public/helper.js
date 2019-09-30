@@ -90,7 +90,7 @@ var index = 0;
 var score = 0;
 
 function loadTest(test_id){
-
+  score = 0;
   // console.log(activeTests)
 
   let elem = document.getElementsByClassName("test-page")
@@ -103,11 +103,13 @@ function loadTest(test_id){
   id = Number(test_id)
   // console.log(activeTests[id - 1])
 
-  continueTest()
+  //  ques = Math.floor(Math.random() * (activeTests[id - 1].questions.length - 1)) + 1
+
+  continueTest(ques)
   // index = 0
 }
 
-function continueTest(){
+function continueTest(ques){
   if(index < 5){
 
 
@@ -225,6 +227,8 @@ function checkAnswer(){
     fourth.disabled = true
 
     index++
+    ques = (ques + 1) % (activeTests[id - 1].questions.length)
+
   }
 }
 
