@@ -750,6 +750,7 @@ input[type="checkbox"]{
   border-radius: 5px;
   width: 45%;
   text-align: center;
+  cursor: pointer;
 }
 
 footer{
