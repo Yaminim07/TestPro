@@ -225,11 +225,6 @@ header > a{
   margin-bottom: 0px;
 }
 
-.flex-items:hover{
-  background-color:#D8BFD8;
-  color: black;
-}
-
 /* .wrapper{
   text-align: center;
 } */
@@ -292,6 +287,7 @@ header > a{
   background-size: cover;
   padding: 120px 20px;
   position: relative;
+  min-height: 100vh;
 }
 
 .test-container h2{
@@ -690,6 +686,7 @@ input[type="checkbox"]{
 .host-details{
   position: relative;
   padding: 20px 0px;
+  min-height: 100vh;
 }
 
 .host-details h3{

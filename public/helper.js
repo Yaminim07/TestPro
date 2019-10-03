@@ -195,20 +195,7 @@ function setCheckTabColor(){
   }
 
   else{
-    if(first.checked && first.nextSibling.innerHTML === answer){
-      document.getElementsByClassName('check-tab')[0].style.background = "green"
-    }
-
-    else if(second.checked && second.nextSibling.innerHTML === answer){
-      document.getElementsByClassName('check-tab')[0].style.background = "green"
-    }
-
-    else if(third.checked && third.nextSibling.innerHTML === answer){
-      document.getElementsByClassName('check-tab')[0].style.background = "green"
-
-    }
-
-    else if(fourth.checked && fourth.nextSibling.innerHTML === answer){
+    if((first.checked && first.nextSibling.innerHTML === answer) || (second.checked && second.nextSibling.innerHTML === answer) || (third.checked && third.nextSibling.innerHTML === answer) || (fourth.checked && fourth.nextSibling.innerHTML === answer)){
       document.getElementsByClassName('check-tab')[0].style.background = "green"
     }
 
@@ -221,9 +208,6 @@ function setCheckTabColor(){
     third.disabled = true
     fourth.disabled = true
   }
-
-
-
 
 }
 
