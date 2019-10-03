@@ -12,30 +12,11 @@
     <title>Host Page</title>
 </head>
 <body onload="fetchData()">
+  <p id="showPopUp">Pop Up</p>
   <header class="clearfix">
     <div class="logo-container"><img src="" alt="Logo"></div>
     <a href="/logout">LOGOUT</a>
   </header>
-
-  <!-- <div class="add-page">
-    <div class="cross">
-      <span class="cross-container"><i class="fa fa-times" onclick="loadHome()"></i></span>
-    </div>
-    <div class="test-name">
-      <input type="text" value="ADD A TEST NAME">
-    </div>
-    <div class="host-question">
-      <h3>Question</h3>
-      <textarea></textarea>
-    </div>
-    <div class="add-answers">
-      <div><input type="text" name="answer" value="Correct answer"></div>
-      <div><input type="text" name="option2" value="option2"></div>
-      <div><input type="text" name="option3" value="option3"></div>
-      <div><input type="text" name="option4" value="option4"></div>
-    </div>
-    <a class="add-question-btn" href="/newTest-page"><i class="fa fa-plus"></i><span>ADD</span></a>      
-  </div> -->
 
   <div class="confirm">
     <div class="cross">
@@ -151,72 +132,7 @@
     var testname;
     var questions = [];
     var yourTests = [];
-
-    // function fetchData() {
-    //   var request = new XMLHttpRequest();
-    //   request.onreadystatechange = function () {
-    //   if (this.readyState == 4 && this.status == 200) {
-    //     var newData = JSON.parse(this.response)
-    //     console.log(newData)
-    //     let parent = document.getElementsByClassName('test')[0]
-    //     for(let i = 0;i < newData.length;i++){
-    //       let topicContainer = document.createElement("div")
-    //       topicContainer.setAttribute("class",'topic-container')
-    //       let h4 = document.createElement("h4")
-    //       h4.innerHTML = "TOPIC"
-    //       let p = document.createElement("p")
-    //       p.innerHTML = newData[i].testname
-    //       topicContainer.appendChild(h4)
-    //       topicContainer.appendChild(p)
-    //       let questionContainer = document.createElement("div")
-    //       questionContainer.setAttribute("class",'question-container')
-    //       h4 = document.createElement("h4")
-    //       h4.innerHTML = "Questions"
-    //       p = document.createElement("p")
-    //       p.innerHTML = newData[i].questions.length
-    //       questionContainer.appendChild(h4)
-    //       questionContainer.appendChild(p)
-
-    //       //Edit btn
-
-    //       let btnContainer = document.createElement("div")
-    //       btnContainer.setAttribute("class","btn-container clearfix")
-    //       let editBtn = document.createElement("a")
-    //       editBtn.setAttribute("class","edit-btn")
-    //       let icon = document.createElement("i")
-    //       icon.setAttribute("class","fa fa-pencil")
-    //       let txt = document.createElement("span")
-    //       txt.innerHTML = "EDIT"
-    //       editBtn.appendChild(icon)
-    //       editBtn.appendChild(txt)
-    //       btnContainer.appendChild(editBtn)
-
-    //       //Delete btn
-
-    //       let deleteBtn = document.createElement("a")
-    //       deleteBtn.setAttribute("class","delete-btn")
-    //       icon = document.createElement("i")
-    //       icon.setAttribute("class","fa fa-trash")
-    //       txt = document.createElement("span")
-    //       txt.innerHTML = "DELETE"
-    //       deleteBtn.appendChild(icon)
-    //       deleteBtn.appendChild(txt)
-    //       btnContainer.appendChild(deleteBtn)
-
-
-    //       let yourTest = document.createElement("div")
-    //       yourTest.setAttribute("class","your-test clearfix")
-    //       yourTest.appendChild(topicContainer)
-    //       yourTest.appendChild(questionContainer)
-    //       yourTest.appendChild(btnContainer)
-    //       parent.appendChild(yourTest)
-    //     }
-    //   }
-    //   };
-    //   request.open('GET','/fetch-data', true)
-    //   request.send();
-    // }
-
+    
   </script>
 </body>
 </html>

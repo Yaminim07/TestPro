@@ -102,12 +102,16 @@ app.use(bodyParser.urlencoded({
 app.post('/add-question', (req, res) => {
   
   // console.log(req.body)
+  var test_id_holder = {}
   new schema.Test({
     testname: req.body.testname,
     host_id: req.user.id,
     questions: req.body.questions
-  }).save()
-  res.send()
+  }).save().then((data) => {
+    test_id_holder.test_id = data._id
+    res.send(test_id_holder)
+  })
+  
 });
 
 
@@ -126,6 +130,29 @@ app.post('/save-test-details', (req, res) => {
   })
 })
 
+app.post('/save-question', (req, res) => {
+
+  mongoose.model('test').findById(req.body.test_id).then((data) => {
+    let _id = req.body.test_id
+    let quesArray = data.questions
+    let ques = {
+      details: req.body.details,
+      answer: req.body.answer,
+      option1: req.body.option1,
+      option2: req.body.option2,
+      option3: req.body.option3
+    }
+    quesArray.push(ques)
+    // console.log(quesArray)
+    
+    mongoose.model('test').update({_id: _id}, {$set: {questions: quesArray}}).then((data) => {
+      // console.log('executed')
+      res.send()
+    })
+  })
+
+})
+
 
 app.post('/delete-data', (req, res) => {
   mongoose.model('test').remove(req.body).then((data) => {
@@ -136,7 +163,6 @@ app.post('/delete-data', (req, res) => {
 
 app.get('/add-question', (req, res) => {
   // add Question To Database
-  
   res.sendFile('views/add-page.html' , { root : __dirname});
 });
 

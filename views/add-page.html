@@ -15,6 +15,7 @@
 </head>
 
 <body>
+  <p id="showPopUp">Pop Up</p>
   <form class="add-page" id="form-element" action="/add-question" method="POST">
     <div class="cross">
       <a href="/host"><span class="cross-container"><i class="fa fa-times"></i></span></a>
@@ -22,25 +23,36 @@
     <div class="test-name">
       <input type="text" placeholder="ADD A TEST NAME" name="testname" class="testname">
     </div>
+
+    <!-- <div class="question-wrapper">
+      <div class="question-added clearfix">
+        <span>Question 1</span>
+        <a>EDIT</a>
+      </div>
+    </div> -->
     <div class="host-question">
       <h3>Question</h3>
-      <textarea name="question"></textarea>
+      <textarea name="question" id="question"></textarea>
     </div>
     <div class="add-answers">
-      <div><input type="text" name="answer" placeholder="Correct answer"></div>
-      <div><input type="text" name="option1" placeholder="option1"></div>
-      <div><input type="text" name="option2" placeholder="option2"></div>
-      <div><input type="text" name="option3" placeholder="option3"></div>
-      <a class="add-question-btn" onclick="addQuestion()">ADD QUESTION</a> 
-      <a href="/host" class="add-question-btn done-btn" onclick="return saveData()">DONE</a>  
+      <div><input type="text" name="answer" placeholder="Correct answer" id="correctAnswer"></div>
+      <div><input type="text" name="option1" placeholder="option1" id="option1"></div>
+      <div><input type="text" name="option2" placeholder="option2" id="oprion2"></div>
+      <div><input type="text" name="option3" placeholder="option3" id="option3"></div> 
     </div>
+    <a class="add-question-btn" onclick="addQuestion()">ADD QUESTION</a> 
+    <a class="add-question-btn done-btn" onclick="saveData()">DONE</a> 
     
     <!-- <a href="/profile">LOAD PROFILE</a> -->
     <!-- <input type="submit" name="action" class="done-btn" value="DONE">     -->
   </form>
 <script>
   var testname;
-    var questions = []
+  var questions = [];
+  var newQuestions = [];
+  var test_id = "";
+  var host_id = "";
+  var currentTest = {};
 </script>
 </body>
 

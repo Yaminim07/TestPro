@@ -14,6 +14,7 @@
 </head>
 
 <body onload="loadTests()">
+  <p id="showPopUp">Pop Up</p>
   <header class="clearfix">
     <div class="logo-container"><img src="" alt="Logo"></div>
     <a href="/logout">LOGOUT</a>
@@ -33,7 +34,7 @@
       <div class="option3"><input type="checkbox" name="answer3" id="option3"><span id="answer3">ANSWER1</span></div>
       <div class="option4"><input type="checkbox" name="answer4" id="option4"><span id="answer4">ANSWER1</span></div>
     </div>
-    <div class="check-tab" onclick="checkAnswer()">
+    <div class="check-tab" onclick="setCheckTabColor()">
       <a>CHECK</a>
     </div>
     <div class="next clearfix">
@@ -41,7 +42,7 @@
         <span>SCORE</span>
         <span class="score-holder"></span>
       </span>   -->
-      <span onclick="continueTest()"><a><i class="fa fa-arrow-right"></i></a></span>
+      <span onclick="checkAnswer()"><a><i class="fa fa-arrow-right"></i></a></span>
     </div>
   </div>
 
@@ -50,7 +51,7 @@
     <div class="test-container">
       <h2>ACTIVE TESTS</h2>
       <section class="test-wrapper">
-        <!-- <div class="test-flex">
+        <div class="test-flex">
           <div class="testbar clearfix" onclick="showDetails(1)">
             <a onclick="loadTest()">START</a>
             <span>HTML</span>
@@ -62,7 +63,7 @@
               Voluptate,
               pariatur doloremque?</p>
           </div>
-        </div> -->
+        </div>
         <!-- <div class="test-flex">
           <div class="testbar clearfix" onclick="showDetails(2)">
             <a onclick="loadTest()">START</a>
@@ -219,7 +220,6 @@
      <div class="certificate-tab"><span>Certificate Link</span></div>
      <div class="link">
        <a href="" class="certificate-link" target="_blank">certificate</a>
-       <!-- <a class="copy-icon" onclick="copyLink()"><i class="fa fa-copy"></i></a> -->
      </div> 
     </div>
   </div>
@@ -232,82 +232,11 @@
 
   
   <script>
-  //   function loadTests(){
-  //     var request = new XMLHttpRequest
-  //     request.onreadystatechange = function(){
-  //     if(this.readyState == 4 && this.status == 200){
-  //       var newData = JSON.parse(this.response)
-  //       for(let i = 0;i < newData.length; i++){
-  //         let testFlex = document.createElement("div")
-  //         testFlex.setAttribute("class","test-flex")
-
-  //         //testBar creation
-  //         let testBar = document.createElement("div")
-  //         testBar.setAttribute("class","testbar clearfix")
-  //         testBar.setAttribute("onclick","showDetails(" + i + 1 + ")")
-  //         let a = document.createElement("a")
-  //         a.setAttribute("onclick","loadTest()")
-  //         a.innerHTML = "START"
-  //         let span = document.createElement("span")
-  //         span.innerHTML = newData[i].testname
-  //         testBar.appendChild(a)
-  //         testBar.appendChild(span)
-
-
-  //         //testDetails creation
-  //         let testDetails = document.createElement("div")
-  //         testDetails.setAttribute("class","test-details")
-  //         let p = document.createElement("p")
-  //         //Host name fetching from database
-  //         // var host = mongoose.model("user").findOne({id: newData[i].host_id})
-  //         p.innerHTML = "This test is hosted by " //+ host.username
-  //         testDetails.appendChild(p)
-
-  //         testFlex.appendChild(testBar)
-  //         testFlex.appendChild(testDetails)
-  //         document.getElementsByClassName("test-wrapper")[0].appendChild(testFlex)
-  //       }
-  //     }
-  //   }
-  //   request.open('GET','/load-tests',true)
-  //   request.send()
-  // }
-
-
-
-
-
-
     var activeTests = [];
 
     var index = 0, score = 0, answer, id, ques;
+    var illegalAttempt = 0;
 
-
-    // function loadTest(){
-    //   let elem = document.getElementsByClassName("test-page")
-    //   elem[0].style.display = "block";
-    //   document.getElementsByClassName("applyFade")[0].style.opacity = 0.4;        
-    //   document.getElementsByClassName("image-container")[0].style.opacity = 0.4;
-    // }
-
-    // function loadResult(){
-    //   let elem = document.getElementsByClassName("result")
-    //   elem[0].style.display = "block";
-    //   document.getElementsByClassName("applyFade")[0].style.opacity = 0.4;  
-    //   document.getElementsByClassName("test-page")[0].style.display = "none";
-    // }
-
-
-    // function showDetails(index){
-    //   let elem = document.getElementsByClassName("test-details")
-    //   if( !elem[index - 1].style.display || elem[index - 1].style.display === "none")
-    //   elem[index - 1].style.display = "block"
-    //   else
-    //   elem[index - 1].style.display = "none"
-      
-    //   // elem[0].style.transform = "scaleY(1)"
-    //   // elem[0].style.display = "block"
-    // }
   </script>
 </body>
 
