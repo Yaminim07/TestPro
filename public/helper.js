@@ -67,14 +67,9 @@ function loadTest(test_id){
   document.getElementsByTagName('header')[0].style.opacity = 0;
   document.getElementsByTagName('footer')[0].style.opacity = 0;      
 
-  // document.getElementsByClassName("image-container")[0].style.opacity = 0.4;
   id = Number(test_id)
-  // console.log(activeTests[id - 1])
-
-  //  ques = Math.floor(Math.random() * (activeTests[id - 1].questions.length - 1)) + 1
 
   continueTest(ques)
-  // index = 0
 }
 
 function continueTest(ques){
@@ -346,8 +341,10 @@ function fetchData() {
   if (this.readyState == 4 && this.status == 200) {
     var newData = JSON.parse(this.response)
     yourTests = newData
+    // console.log(yourTests)
     let parent = document.getElementsByClassName('test')[0]
     for(let i = 0;i < newData.length;i++){
+      
       let topicContainer = document.createElement("div")
       topicContainer.setAttribute("class",'topic-container')
       let h4 = document.createElement("h4")
@@ -371,7 +368,8 @@ function fetchData() {
       btnContainer.setAttribute("class","btn-container clearfix")
       let editBtn = document.createElement("a")
       editBtn.setAttribute("class","edit-btn")
-      editBtn.setAttribute("onclick","loadEditpage(this.id)")
+      // editBtn.setAttribute("onclick","loadEditpage(this.id)")
+      editBtn.setAttribute("href", "/update-page/" + (yourTests[i]._id))
       editBtn.setAttribute('id', i + 1)
       let icon = document.createElement("i")
       icon.setAttribute("class","fa fa-pencil")
@@ -452,7 +450,7 @@ function loadEditpage(id){
     //   refNode.parentElement.insertBefore(hostQuestion, refNode.nextSibling)
     // }
   }
-  req.open('GET','/add-question',true)
+  req.open('POST','/update-question',true)
   req.send()
 
 }
@@ -650,9 +648,15 @@ function updateQuestion(id){
 
  //display block
 
-  let question = document.getElementsByClassName('host-question')[id]
-  let answers = document.getElementsByClassName('add-answers')[id]
-  if(question.style.display === "none"){
+  let question = document.getElementsByClassName('host-question')[id - 1]
+  let answers = document.getElementsByClassName('add-answers')[id - 1]
+
+  if(!question.style.display && !answers.style.display){
+    question.style.display = "block"
+    answers.style.display = "flex"
+  }
+
+  else if(question.style.display === "none"){
     question.style.display = "block"
     answers.style.display = "flex"
   }
@@ -662,12 +666,175 @@ function updateQuestion(id){
     answers.style.display = "none"
   }
 
-
-
 }
 
 function setZero(){
   score = 0;
   index = 0;
   return true;
+}
+
+function updateTestDetails(){
+  var req = new XMLHttpRequest()
+  req.onreadystatechange = function(){
+    if(this.readyState == 4 && this.status == 200){
+      var thisTest = JSON.parse(this.response)
+      document.getElementsByClassName('testname')[0].value = thisTest.testname
+      for(let i = 0;i < thisTest.questions.length; i++){
+        // console.log('executed')
+        let wrapper = document.createElement("div")
+        wrapper.setAttribute("class","question-wrapper")
+
+        let questionAdded = document.createElement("div")
+        questionAdded.setAttribute("class","question-added clearfix")
+
+        let span = document.createElement("span")
+        span.innerHTML = "Question " + (i + 1)
+
+        let a = document.createElement("a")
+        a.innerHTML = "EDIT"
+        a.setAttribute("id", i + 1)
+        a.setAttribute("onclick","updateQuestion(this.id)")
+
+
+        questionAdded.appendChild(span)
+        questionAdded.appendChild(a)
+        wrapper.appendChild(questionAdded)
+
+        //question block
+
+        let hostQuestion = document.createElement("div")
+        hostQuestion.setAttribute("class","host-question")
+
+        let h3 = document.createElement("h3")
+        h3.innerHTML = "Question"
+
+        let textarea = document.createElement("textarea")
+        textarea.setAttribute("class","question")
+        textarea.setAttribute("name","question")
+        textarea.value = thisTest.questions[i].details
+
+        hostQuestion.appendChild(h3)
+        hostQuestion.appendChild(textarea)
+
+        //answers block
+
+        let addAnswers = document.createElement("div")
+        addAnswers.setAttribute("class","add-answers")
+
+        let div1 = document.createElement("div")
+        let input1 = document.createElement("input")
+        input1.setAttribute("class","correctAnswer")
+        input1.setAttribute("type","text")
+        input1.setAttribute("name","answer")
+        input1.value = thisTest.questions[i].answer
+        div1.appendChild(input1)
+
+        let div2 = document.createElement("div")
+        let input2 = document.createElement("input")
+        input2.setAttribute("class","option1")
+        input2.setAttribute("type","text")
+        input2.setAttribute("name","answer")
+        input2.value = thisTest.questions[i].option1
+        div2.appendChild(input2)
+
+        let div3 = document.createElement("div")
+        let input3 = document.createElement("input")
+        input3.setAttribute("class","option2")
+        input3.setAttribute("type","text")
+        input3.setAttribute("name","answer")
+        input3.value = thisTest.questions[i].option2
+        div3.appendChild(input3)
+
+        let div4 = document.createElement("div")
+        let input4 = document.createElement("input")
+        input4.setAttribute("class","option3")
+        input4.setAttribute("type","text")
+        input4.setAttribute("name","answer")
+        input4.value = thisTest.questions[i].option3
+        div4.appendChild(input4)
+
+        addAnswers.appendChild(div1)
+        addAnswers.appendChild(div2)
+        addAnswers.appendChild(div3)
+        addAnswers.appendChild(div4)
+
+        let form = document.getElementById('form-element')
+        let ref = document.getElementsByClassName('add-question-btn')[0]
+        form.insertBefore(wrapper, ref)
+        form.insertBefore(hostQuestion, ref)
+        form.insertBefore(addAnswers, ref)
+
+      }
+    }
+  }
+
+  req.open('POST','/fetch-test',true)
+  req.setRequestHeader('Content-Type', 'application/json')
+  req.send(JSON.stringify({
+    testId: testId
+  }))
+}
+
+function updateDetails(){
+  let form = document.getElementById("form-element")
+  let count = (form.children.length - 3) / 3
+  let questions = []
+  for(let i = 0;i < count; i++){
+
+    let quesNumber = {}
+    quesNumber.details = document.getElementsByClassName("question")[i].value
+    quesNumber.answer = document.getElementsByClassName("correctAnswer")[i].value
+    quesNumber.option1 = document.getElementsByClassName("option1")[i].value
+    quesNumber.option2 = document.getElementsByClassName("option2")[i].value
+    quesNumber.option3 = document.getElementsByClassName("option3")[i].value
+
+    questions.push(quesNumber)
+
+    document.getElementsByClassName("host-question")[i].style.display = "none"
+    document.getElementsByClassName("add-answers")[i].style.display = "none"
+
+
+  }
+ 
+  let reqData = {}
+  reqData.testname = document.getElementsByClassName("testname")[0].value
+  reqData.questions = questions
+  reqData.testId = testId
+  var request = new XMLHttpRequest()
+  request.onreadystatechange = function(){
+    let popUp = document.getElementById("updatePopUp")
+    popUp.innerHTML = "Test details updated"
+    if(!popUp.style.animation){
+      popUp.style.animation = "cssAnimation 3s"
+      popUp.style.animationDelay = "50ms"
+   
+    }
+
+    else{
+      let newNode = popUp.cloneNode(true)
+      popUp.parentNode.replaceChild(newNode, popUp)
+    }
+  }
+
+  request.open("POST","/update-database",true)
+  request.setRequestHeader('Content-Type', 'application/json')
+  request.send(JSON.stringify(reqData))
+  
+
+}
+
+function setAJAXRequest(method, url, data, header, callBack){
+  var request = new XMLHttpRequest()
+
+  if(callBack){
+    request.onreadystatechange = function(){
+      if(this.readyState == 4 && this.status == 400){
+        callBack()
+      }
+    }
+  }
+
+  request.open(method, url, true)
+  request.send((data) ? (JSON.stringify(data)) : undefined)
 }

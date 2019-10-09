@@ -80,7 +80,6 @@ app.get('/fetch-data', (req, res) => {
     // console.log(typeof data)
     res.send(data)
   })
-  // res.sendFile('views/add-page.html' , { root : __dirname});
 });
 
 app.get('/load-tests', (req,res) => {
@@ -101,7 +100,6 @@ app.use(bodyParser.urlencoded({
 
 app.post('/add-question', (req, res) => {
   
-  // console.log(req.body)
   var test_id_holder = {}
   new schema.Test({
     testname: req.body.testname,
@@ -115,17 +113,19 @@ app.post('/add-question', (req, res) => {
 });
 
 
-app.post('/save-test-details', (req, res) => {
-  // console.log(req.body)
+app.get('/update-page/:testId', (req, res) => {
+  res.sendFile('views/update.html' , { root : __dirname});
+})
 
-  // let testname = mongoose.model('test').findOne({_id: req.body.test_id}).testname
-  // console.log(testname)
+
+app.post('/save-test-details', (req, res) => {
+  
   new schema.Performance({
     testname : req.body.testname,
     username: req.user.username,
     score: req.body.score
   }).save().then((data) => {
-    // console.log(data)
+ 
     res.send(data)
   })
 })
@@ -153,16 +153,31 @@ app.post('/save-question', (req, res) => {
 
 })
 
+app.post('/fetch-test', (req, res) => {
+  mongoose.model('test').findOne({_id: req.body.testId}).then((data) => {
+    res.send(data)
+  })
+})
+
 
 app.post('/delete-data', (req, res) => {
   mongoose.model('test').remove(req.body).then((data) => {
-    // console.log(data)
+
+  })
+})
+
+app.post("/update-database", (req, res) => {
+  mongoose.model('test').findOneAndUpdate({_id: req.body.testId}, {
+    testname: req.body.testname,
+    questions: req.body.questions
+  }).then((data) => {
+ 
   })
 })
 
 
 app.get('/add-question', (req, res) => {
-  // add Question To Database
+
   res.sendFile('views/add-page.html' , { root : __dirname});
 });
 
@@ -172,17 +187,10 @@ app.get('/add-question', (req, res) => {
 
 app.get('/generate-link/:resultId', (req, res) => {
 
-  // mongoose.model('performance').findOne({_id: req.params.resultId}).then((data) => {
-  //   // console.log(data)
-  //   document.getElementById('testname').innerHTML = data.testname
-  //   res.sendFile('views/certificate.html' , { root : __dirname});  
-  // })
   res.sendFile('views/certificate.html' , { root : __dirname});    
 });
 
 app.post('/get-test-data', (req, res) => {
-  // console.log(req.body)
-  // console.log(JSON.parse(req.body))
   mongoose.model('performance').find({_id: req.body.id}).then((data) => {
     
     res.send(data)
@@ -192,114 +200,7 @@ app.post('/get-test-data', (req, res) => {
 
 
 
-
-
-
-
-
 app.listen(process.env.PORT || 3000, () => {
   console.log('Request recieving')
 });
 
-
-
-
-
-
-
-
-
-
-
-
-// function home(){
-//   let mainContainer = document.getElementsByClassName("main-container")
-//   let elem = mainContainer[0].lastElementChild
-//   while(elem){
-//     mainContainer[0].removeChild(elem)
-//     elem = mainContainer[0].lastElementChild
-//   }
-//   let container = document.createElement("div")
-//   let head = document.createElement("h1")
-//   head.innerHTML = "Tests available"
-//   let innerContainer = document.createElement("div")
-//   let list = document.createElement("a")
-//   list.setAttribute("href", "./index.html")
-//   list.innerHTML = "Test1"
-//   let list2 = document.createElement("a")
-//   list2.setAttribute("href", "./index.html")
-//   list2.innerHTML = "Test2"
-//   innerContainer.appendChild(head)
-//   innerContainer.appendChild(list)
-//   innerContainer.appendChild(list2)
-//   container.appendChild(innerContainer)
-//   mainContainer[0].appendChild(container)
-
-// }
-
-// function showDropdown(){
-//   let elem = document.getElementsByClassName("dropdown-content")
-//   if(!elem[0].style.opacity)
-//   elem[0].style.opacity = 1
-//   else if(elem[0].style.opacity === "0")
-//   elem[0].style.opacity = 1
-//   else
-//   elem[0].style.opacity = 0
-// }
-
-// function showDetails(index){
-//   let elem = document.getElementsByClassName("test-details")
-//   if( !elem[index - 1].style.display || elem[index - 1].style.display === "none")
-//   elem[index - 1].style.display = "block"
-//   else
-//   elem[index - 1].style.display = "none"
-  
-//   // elem[0].style.transform = "scaleY(1)"
-//   // elem[0].style.display = "block"
-// }
-
-// function removeDetails(index){
-//   let elem = document.getElementsByClassName("test-details")
-//   elem[index - 1].style.display = "none"
-// }
-
-// function loadTest(){
-//   let elem = document.getElementsByClassName("test-page")
-//   elem[0].style.display = "block";
-//   document.getElementsByClassName("applyFade")[0].style.opacity = 0.4;        
-        
-// //     $("#but2").click(function(){
-// //             $("#popdiv").fadeOut(200);              
-// //         });
-// // });
-//   document.getElementsByClassName("image-container")[0].style.opacity = 0.4;
-// }
-
-// function showScore(){
-//   document.getElementsByClassName("result")[0].style.display = "block";
-//   document.getElementsByClassName("test-page")[0].style.display = "none";
-// }
-
-// function loadResult(){
-//   let elem = document.getElementsByClassName("result")
-//   elem[0].style.display = "block";
-//   document.getElementsByClassName("applyFade")[0].style.opacity = 0.4;  
-//   document.getElementsByClassName("test-page")[0].style.display = "none";
-// }
-
-// function loadHome(){
-//   let elem = document.getElementsByClassName("result")
-//   elem[0].style.display = "none";
-//   document.getElementsByClassName("applyFade")[0].style.opacity = 1;  
-//   document.getElementsByClassName("test-page")[0].style.display = "none";
-// }
-
-// function loadNewTest(){
-//   document.getElementsByClassName("host-details")[0].style.opacity = 0.4
-//   document.getElementsByClassName("add-page")[0].style.display = "block"
-// }
-
-// function loadConfirmation(){
-//   document.getElementsByClassName("host-details")[0].style.opacity = 0.4;
-//   document.getElementsByClassName("confirm")[0].style.display = "block";
-// }

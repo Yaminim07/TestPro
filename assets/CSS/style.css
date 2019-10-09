@@ -43,6 +43,21 @@ a{
   /* animation: cssAnimation 0s 5s forwards; */ 
 }
 
+#updatePopUp{
+  width: 50%;
+  margin: 0px auto;
+  text-align: center;
+  color: white;
+  background-color: black;
+  padding: 10px 0px;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%);
+  opacity: 0;
+  z-index: 2;
+}
+
 @keyframes cssAnimation {
   /* to {
       opacity: 1;
@@ -522,8 +537,9 @@ header > a{
 }
 
 .host-question > textarea{
-  width: 100%;
+  /* width: 100%; */
   resize: vertical;
+  min-width: 90%;
 }
 
 .host-question{

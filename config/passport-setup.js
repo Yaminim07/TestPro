@@ -31,7 +31,7 @@ passport.use(new GoogleStrategy({
     }).then((currentUser) => {
 
       if(currentUser){
-        console.log(currentUser)
+        // console.log(currentUser)
         done(null, currentUser)
       }
 
@@ -50,7 +50,7 @@ passport.use(new GoogleStrategy({
             image: profile.photos[0].value,
             isHost: isHost
           }).save().then((newUser) => {
-            console.log(newUser)
+            // console.log(newUser)
             done(null, newUser)
           })
         })

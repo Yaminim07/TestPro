@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../assets/CSS/style.css">
+
+  <script src="../public/helper.js"></script>
+
+  <title>Update Page</title>
+</head>
+
+<body onload="updateTestDetails()">
+  <p id="updatePopUp">Pop Up</p>
+  <form class="add-page" id="form-element" action="/add-question" method="POST">
+    <div class="cross">
+      <a href="/host"><span class="cross-container"><i class="fa fa-times"></i></span></a>
+    </div>
+    <div class="test-name">
+      <input type="text" placeholder="ADD A TEST NAME" name="testname" class="testname">
+    </div>
+    <a class="add-question-btn" onclick="updateDetails()">UPDATE</a> 
+  </form>
+<script>
+  var url = document.URL.split('/')
+  var testId = url[url.length - 1]
+</script>
+</body>
+
+</html>
